@@ -1,4 +1,8 @@
 /* Empty. Add your own CSS if you like */
+.container {
+  margin: 10px 10px 0 10px;
+}
+
 .done {
   text-decoration: line-through;
 }

@@ -16,8 +16,17 @@ app.controller('mainController', function($scope) {
   var tasks = new getTasks();
 
   $scope.list = tasks.items;
+  $scope.removeStatus = false;
 
   $scope.getShitDone = function(item) {
     item.done = !item.done;
   };
+
+  $scope.onRemove = function(item) {
+    tasks.remove(item);
+  };
+
+  $scope.onClickRemove = function() {
+    $scope.removeStatus = !$scope.removeStatus;
+  }
 })

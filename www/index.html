@@ -40,15 +40,16 @@
         <h1 class="title">Planos para 2017 - Personal Goals</h1>
       </ion-header-bar>
 
-      <ion-content ng-controller="mainController">
-        <ion-list>
+      <ion-content ng-controller="mainController" class="container">
+        <ion-list show-delete="removeStatus">
           <ion-item ng-repeat="item in list track by $index" ng-hide="item.done">
             <div class="row">
               <div class="col col-90">
-                <span ng-class="{'done': item.done}">{{item.description}}</span>    
+                <span ng-class="{'done': item.done}">{{item.description}}</span>
+                <ion-delete-button class="ion-minus-circled" ng-click="onRemove(item)"></ion-delete-button>   
               </div>
               <div class="col col-10">
-                <button item-right class="button button-small button-positive button-outline" ng-click="getShitDone(item)"><i class="icon ion-checkmark" ng-show="item.done"></i></button>
+                <button class="button button-small button-positive button-outline" ng-click="getShitDone(item)"><i class="icon ion-checkmark" ng-show="item.done"></i></button>
               </div>
             </div>
           </ion-item>
@@ -56,11 +57,12 @@
 
         <br><br>
 
-        <ion-list>
+        <ion-list show-delete="removeStatus">
           <ion-item ng-repeat="item in list track by $index" ng-hide="!item.done">
             <div class="row">
               <div class="col col-90">
-                <span ng-class="{'done': item.done}">{{item.description}}</span>    
+                <span ng-class="{'done': item.done}">{{item.description}}</span> 
+                <ion-delete-button class="ion-minus-circled" ng-click="onRemove(item)"></ion-delete-button>      
               </div>
               <div class="col col-10">
                 <button item-right class="button button-small button-positive button-outline" ng-click="getShitDone(item)"><i class="icon ion-checkmark" ng-show="item.done"></i></button>
@@ -68,8 +70,10 @@
             </div>
           </ion-item>
         </ion-list>
+
+        <button class="button button-block button-assertive" ng-click="onClickRemove()">Remove</button>
       </ion-content>
-      
+
     </ion-pane>
   </body>
 </html>
