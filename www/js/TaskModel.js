@@ -1,3 +1,36 @@
 function getTasks() {
-  this.items = ['Item 01', 'Item 02', 'Item 03', 'Item 03'];
+  this.items = [
+    {
+      description: 'Aprender Vuejs',
+      done: false
+    },
+    {
+      description: 'Aprender Ruby on Rails',
+      done: false
+    },
+    {
+      description: 'Aprender Banco de Dados NoSQL',
+      done: false
+    },
+    {
+      description: 'Começar a trabalhar em uma empresa bacana',
+      done: false
+    },
+    {
+      description: 'Aprender a desenvolver aplicações mobile',
+      done: false
+    },
+    {
+      description: 'Fazer parte de uma comunidade',
+      done: false
+    },
+    {
+      description: 'Começar a palestrar em eventos',
+      done: false
+    },
+    {
+      description: 'Criar projetos open-source',
+      done: false
+    },
+  ];
 }
