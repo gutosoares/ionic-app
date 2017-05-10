@@ -1,5 +1,5 @@
 function getTasks() {
-  this.items = [
+  this.tasks = [
     {
       description: 'Aprender Vuejs',
       done: false
@@ -34,12 +34,12 @@ function getTasks() {
     },
   ];
 
-  this.add = function(item) {
-    this.items.push(item);
+  this.add = function(task) {
+    this.tasks.push(task);
   };
 
-  this.remove = function(item) {
-    var pos = this.items.indexOf(item);
-    this.items.splice(pos, 1);
+  this.remove = function(task) {
+    var pos = this.tasks.indexOf(task);
+    this.tasks.splice(pos, 1);
   };
 }

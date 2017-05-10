@@ -41,14 +41,14 @@
       </ion-header-bar>
 
       <ion-content ng-controller="mainController" class="container">
-        <button class="button button-block button-calm button-outline" ng-click="showModal()">Add ToDo</button>
+        <button class="button button-block button-calm button-outline" ng-click="onAddTask()">Add ToDo</button>
         <ion-list show-delete="removeStatus">
           <ion-item ng-repeat="item in list track by $index" ng-hide="item.done">
             <div class="row">
               <div class="col col-90">
                 <span ng-class="{'done': item.done}">{{item.description}}</span>
                 <ion-delete-button class="ion-minus-circled" ng-click="onRemove(item)"></ion-delete-button>
-                <ion-option-button class="button button-positive">Edit</ion-option-button>  
+                <ion-option-button class="button button-positive" ng-click="onEditTask(item)">Edit</ion-option-button>  
               </div>
               <div class="col col-10">
                 <button class="button button-small button-positive button-outline" ng-click="getShitDone(item)"><i class="icon ion-checkmark" ng-show="item.done"></i></button>
@@ -78,23 +78,42 @@
 
     </ion-pane>
 
-    <script id="add-item.html" type="text/ng-template">
+    <!--<script id="add-item.html" type="text/ng-template">
       <ion-modal-view>
         <ion-header-bar class="bar-calm">
           <h1 class="title">Add New ToDo</h1>
-          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+          <button class="button button-clear button-primary" ng-click="modalAdd.hide()">Cancel</button>
         </ion-header-bar>
         <ion-content class="container">
           <div class="list">
             <form name="myForm">
               <label class="item item-input">
-                <input ng-model="task.description" type="text" class="ng-pristine ng-valid ng-empty ng-touched" placeholder="ToDo" ng-required="true" name="task" required>
+                <input ng-model="data.description" type="text" class="ng-pristine ng-valid ng-empty ng-touched" placeholder="ToDo" ng-required="true" name="task" required>
               </label>
               <button class="button button-full button-balanced" ng-click="onAddTask(task)" ng-disabled="myForm.task.$invalid">Create</button>
             </form>
           </div>
         </ion-content>
       </ion-modal-view>
+    </script>-->
+
+    <!--<script id="details-item.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar class="bar-calm">
+          <h1 class="title">Details ToDo</h1>
+          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+        </ion-header-bar>
+        <ion-content class="container">
+          <ion-list>
+            <ion-item>
+              {{taskDetails.description}}
+            </ion-item>
+            <ion-item>
+              {{taskDetails.done}}
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ion-modal-view>-->
     </script>
   </body>
 </html>

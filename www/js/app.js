@@ -12,72 +12,72 @@ app.run(function($ionicPlatform) {
   });
 })
 
-app.controller('mainController', function($scope, $ionicModal) {
-  $scope.list = [
-    {
-      description: 'Aprender Vuejs',
-      done: false
-    },
-    {
-      description: 'Aprender Ruby on Rails',
-      done: false
-    },
-    {
-      description: 'Aprender Banco de Dados NoSQL',
-      done: false
-    },
-    {
-      description: 'Começar a trabalhar em uma empresa bacana',
-      done: false
-    },
-    {
-      description: 'Aprender a desenvolver aplicações mobile',
-      done: false
-    },
-    {
-      description: 'Fazer parte de uma comunidade',
-      done: false
-    },
-    {
-      description: 'Começar a palestrar em eventos',
-      done: false
-    },
-    {
-      description: 'Criar projetos open-source',
-      done: false
-    },
-  ];
+app.controller('mainController', function($scope, $ionicModal, $ionicPopup, $ionicListDelegate) {
+  var task = new getTasks();
 
-  $scope.task = {description: '', done: false};
+  $scope.list = task.tasks;
   $scope.removeStatus = false;
 
-  $scope.showModal = function() {
-    $scope.task.description = '';
-    $scope.modal.show();
+  // Functions
+  function getItem(item, novo) {
+    $scope.data = {};
+    $scope.data.description = item.description;
+
+    $ionicPopup.show({
+      title: 'New ToDo',
+      scope: $scope,
+      template: '<input type="text" placeholder="ToDo", autofocus="true" ng-model="data.description">',
+      buttons: [
+        {text: 'OK', 
+        onTap: function(e) {
+          item.description = $scope.data.description;
+          if(novo)
+            task.add(item);
+        }},
+        {text: 'Cancel'}
+      ]
+    });
+
+    $ionicListDelegate.closeOptionButtons();
   };
 
-  $scope.getShitDone = function(item) {
-    item.done = !item.done;
+  $scope.getShitDone = function(task) {
+    task.done = !task.done;
   };
 
   $scope.onRemove = function(item) {
-    var pos = $scope.list.indexOf(item);
-    $scope.list.splice(pos, 1);
+    task.remove(item);
   };
 
   $scope.onClickRemove = function() {
     $scope.removeStatus = !$scope.removeStatus;
   };
 
-  $ionicModal.fromTemplateUrl('add-item.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.modal = modal;
-  });
+  $scope.onAddTask = function() {
+    var item = {description: '', done: false};
 
-  $scope.onAddTask = function(task) {
-    $scope.list.push({description: task.description, done: false});
-    $scope.modal.hide();
-  };
+    getItem(item, true);
+  }
+
+  $scope.onEditTask = function(item) {
+    getItem(item, false)
+  }
+
+  // function save() {
+  //   var list = angular.toJson($scope.list);
+  //   localStorage.setItem("taskList", list);
+  // }
+
+  // function getList() {
+  //   var list = localStorage.getItem("taskList");
+  //   if(list !== null) {
+  //     $scope.list = list;
+  //   }
+  // }
+
+  // $scope.onAddTask = function(task) {
+  //   $scope.list.push({description: task.description, done: false});
+  //   $scope.modalAdd.hide();
+  //   save();
+  // };
 })
