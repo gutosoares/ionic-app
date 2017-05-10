@@ -13,13 +13,46 @@ app.run(function($ionicPlatform) {
 })
 
 app.controller('mainController', function($scope, $ionicModal) {
-  var tasks = new getTasks();
+  $scope.list = [
+    {
+      description: 'Aprender Vuejs',
+      done: false
+    },
+    {
+      description: 'Aprender Ruby on Rails',
+      done: false
+    },
+    {
+      description: 'Aprender Banco de Dados NoSQL',
+      done: false
+    },
+    {
+      description: 'Começar a trabalhar em uma empresa bacana',
+      done: false
+    },
+    {
+      description: 'Aprender a desenvolver aplicações mobile',
+      done: false
+    },
+    {
+      description: 'Fazer parte de uma comunidade',
+      done: false
+    },
+    {
+      description: 'Começar a palestrar em eventos',
+      done: false
+    },
+    {
+      description: 'Criar projetos open-source',
+      done: false
+    },
+  ];
 
-  $scope.list = tasks.items;
   $scope.task = {description: '', done: false};
   $scope.removeStatus = false;
 
   $scope.showModal = function() {
+    $scope.task.description = '';
     $scope.modal.show();
   };
 
@@ -27,17 +60,9 @@ app.controller('mainController', function($scope, $ionicModal) {
     item.done = !item.done;
   };
 
-  $scope.onAddItem = function(item) {
-    // var item = {description: 'teste', done: false}
-
-    // showModal();
-    tasks.add(item);
-
-    $scope.modal.hide();
-  };
-
   $scope.onRemove = function(item) {
-    tasks.remove(item);
+    var pos = $scope.list.indexOf(item);
+    $scope.list.splice(pos, 1);
   };
 
   $scope.onClickRemove = function() {
@@ -50,4 +75,9 @@ app.controller('mainController', function($scope, $ionicModal) {
     }).then(function(modal) {
       $scope.modal = modal;
   });
+
+  $scope.onAddTask = function(task) {
+    $scope.list.push({description: task.description, done: false});
+    $scope.modal.hide();
+  };
 })
