@@ -31,8 +31,10 @@ app.controller('mainController', function($scope, $ionicModal, $ionicPopup, $ion
         {text: 'OK', 
         onTap: function(e) {
           item.description = $scope.data.description;
-          if(novo)
+          if(novo) {
             task.add(item);
+          }
+          task.save();
         }},
         {text: 'Cancel'}
       ]
@@ -47,6 +49,7 @@ app.controller('mainController', function($scope, $ionicModal, $ionicPopup, $ion
 
   $scope.onRemove = function(item) {
     task.remove(item);
+    task.save();
   };
 
   $scope.onClickRemove = function() {
@@ -60,7 +63,7 @@ app.controller('mainController', function($scope, $ionicModal, $ionicPopup, $ion
   }
 
   $scope.onEditTask = function(item) {
-    getItem(item, false)
+    getItem(item, false);
   }
 
   // function save() {
